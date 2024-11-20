@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+    rust:
+        container_name: rust-web-app
+        image: my-rust:1.77.0-bookworm
+
+        tty: true
+        environment:
+            - TZ=Asia/Tokyo
+        # volumes:
+        #     - .:/app
