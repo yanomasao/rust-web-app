@@ -24,3 +24,7 @@ makersでも起動できる
 
 cargo make --version  
 makers --version  
+
+## axumでHello World
+cargo run
+curl localhost:8080/hello -v
