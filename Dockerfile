@@ -8,3 +8,11 @@ RUN apt-get -y install wget
 
 # Dockerのインストール
 RUN wget -qO- https://get.docker.com | sh
+
+RUN apt-get install -y tree
+
+RUN rustup component add rustfmt # なぜこれがrustのイメージに入っていないのか？
+
+RUN cargo install cargo-make
+RUN cargo install cargo-nextest # cargo make testすればインストールされるが、ここでインストールしておく
+RUN cargo install cargo-watch # cargo make watchすればインストールされるが、ここでインストールしておく

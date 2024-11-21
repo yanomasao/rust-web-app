@@ -14,3 +14,5 @@ services:
         #     - .:/app
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
+            - .:/workspaces/rust-web-app
+        working_dir: /workspaces/rust-web-app
