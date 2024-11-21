@@ -3,7 +3,7 @@ default_to_workspace = false
 
 [env]
 HOST = "0.0.0.0"
-PORT = 18080
+PORT = 8080
 DATABASE_USERNAME = "app"
 DATABASE_PASSWORD = "passwd"
 DATABASE_NAME = "app"
@@ -14,7 +14,6 @@ REDIS_PORT_INNER = 6379
 AUTH_TOKEN_TTL = 86400
 
 # Docker Composeのネットワーク内でのDB等への接続情報
-
 [tasks.set-env-docker.env]
 DATABASE_HOST = "postgres"
 DATABASE_PORT = "${DATABASE_PORT_INNER}"
@@ -25,7 +24,6 @@ JAEGER_HOST = "jaeger"
 JAEGER_PORT = 6831
 
 # Docker Compose外からDB等にアクセスする際の接続情報
-
 [tasks.set-env-local.env]
 DATABASE_HOST = "localhost"
 DATABASE_PORT = "${DATABASE_PORT_OUTER}"
@@ -35,19 +33,21 @@ REDIS_PORT = "${REDIS_PORT_OUTER}"
 JAEGER_HOST = "localhost"
 JAEGER_PORT = 6831
 
+
 [tasks.before-build]
 run_task = [
-    {name = [
+    { name = [
         "compose-up-db",
         "compose-up-redis",
-    ]},
+    ] },
 ]
 
 [tasks.compose-build-app]
 extend = "set-env-local"
 command = "docker"
 args = [
-    "compose", "build", "app", "--build-arg", "BUILDKIT_INLINE_CACHE=1", "${@}"
+  "compose", "build", "app",
+  "--build-arg", "BUILDKIT_INLINE_CACHE=1", "${@}"
 ]
 
 [tasks.run]
@@ -80,12 +80,13 @@ dependencies = ["before-build"]
 command = "cargo"
 args = ["check"]
 
+
 ### Development
 
 [tasks.watch]
 extend = "set-env-local"
 dependencies = ["before-build"]
-run_task = [{name = ["fmt", "clippy", "test"]}]
+run_task = [{ name = ["fmt", "clippy", "test"] }]
 watch = true
 
 [tasks.fmt]
@@ -100,13 +101,25 @@ args = ["clippy", "--all", "--all-targets", "${@}"]
 
 [tasks.test]
 extend = "set-env-local"
-install_crate = {crate_name = "cargo-nextest", binary = "cargo", test_arg = ["nextest", "--help",]}
+install_crate = { crate_name = "cargo-nextest", binary = "cargo", test_arg = [
+  "nextest", "--help",
+] }
 command = "cargo"
-args = ["nextest", "run", "--workspace", "--status-level", "all", "--test-threds=1",]
+args = [
+  "nextest", "run", "--workspace",
+  "--status-level", "all", "--test-threads=1",
+]
 
 [tasks.clippy-ci]
+extend = "set-env-local"
+dependencies = ["before-build"]
+command = "cargo"
+args = ["clippy", "--", "--no-deps", "-Dwarnings"]
+
+[tasks.test-ci]
 dependencies = ["before-build"]
 run_task = "test"
+
 
 ### Migration
 
