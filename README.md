@@ -28,3 +28,7 @@ makers --version
 ## axumでHello World
 cargo run
 curl localhost:8080/hello -v
+
+## テスト
+cargo make set-env-local
+cargo make test

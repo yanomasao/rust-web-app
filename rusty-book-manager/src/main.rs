@@ -58,7 +58,7 @@ struct DatabaseConfig {
 impl From<DatabaseConfig> for PgConnectOptions {
     fn from(cfg: DatabaseConfig) -> Self {
         Self::new()
-            .host(&cfg.username)
+            .host(&cfg.host)
             .port(cfg.port)
             .username(&cfg.username)
             .password(&cfg.password)
