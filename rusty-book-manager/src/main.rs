@@ -2,7 +2,8 @@ use std::net::{Ipv4Addr, SocketAddr};
 
 use anyhow::Result;
 use axum::{extract::State, http::StatusCode, routing::get, Router};
-use sqlx::{pool, postgres::PgConnectOptions, PgPool};
+// use sqlx::{pool, postgres::PgConnectOptions, PgPool};
+use sqlx::{postgres::PgConnectOptions, PgPool};
 use tokio::net::TcpListener;
 
 #[tokio::main] // main関数を非同期関数にする
