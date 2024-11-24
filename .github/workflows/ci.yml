@@ -15,20 +15,20 @@ jobs:
       run:
         working-directory: ./rusty-book-manager
 
-    services:
-      postgres:
-        image: postgres:latest
-        ports:
-          - 5432:5432
-        env:
-          POSTGRES_USER: app
-          POSTGRES_PASSWORD: passwd
-          POSTGRES_DB: app
-        options: >-
-          --health-cmd "pg_isready -U user -d app"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+    # services:
+    #   postgres:
+    #     image: postgres:latest
+    #     ports:
+    #       - 5432:5432
+    #     env:
+    #       POSTGRES_USER: app
+    #       POSTGRES_PASSWORD: passwd
+    #       POSTGRES_DB: app
+    #     options: >-
+    #       --health-cmd "pg_isready -U user -d app"
+    #       --health-interval 10s
+    #       --health-timeout 5s
+    #       --health-retries 5
 
     steps:
       # 1
