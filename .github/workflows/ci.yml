@@ -34,12 +34,12 @@ jobs:
           tool: nextest,cargo-make
 
       # 5
-      # - name: Tests compile
-      #   run: cargo make test-ci --no-run --locked
+      - name: Tests compile
+        run: cargo make test-ci --no-run --locked
 
-      # # 6
-      # - name: Test
-      #   run: cargo make test-ci
+      # 6
+      - name: Test
+        run: cargo make test-ci
 
       # 7
       - name: Clippy
