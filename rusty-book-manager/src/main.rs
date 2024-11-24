@@ -10,7 +10,8 @@ use tokio::net::TcpListener;
 async fn main() -> Result<()> {
     // データベースの設定
     let database_cfg = DatabaseConfig {
-        host: "host.docker.internal".into(),
+        // host: "host.docker.internal".into(),
+        host: "postgres".into(),
         port: 5432,
         username: "app".into(),
         password: "passwd".into(),
