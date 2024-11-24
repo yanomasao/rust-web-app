@@ -15,7 +15,7 @@ AUTH_TOKEN_TTL = 86400
 
 # Docker Composeのネットワーク内でのDB等への接続情報
 [tasks.set-env-docker.env]
-DATABASE_HOST = "localhost"
+DATABASE_HOST = "postgres"
 DATABASE_PORT = "${DATABASE_PORT_INNER}"
 DATABASE_URL = "postgresql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}?user=${DATABASE_USERNAME}&password=${DATABASE_PASSWORD}"
 REDIS_HOST = "redis"
